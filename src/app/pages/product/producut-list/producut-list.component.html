@@ -1,0 +1,22 @@
+<div class="container product-catalog">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Product List</h2>
+        <button class="btn btn-add-product" (click)="navigateToAddProduct()">
+            <i class="fa-solid fa-plus me-2"></i>Add New Product
+        </button>
+    </div>
+    <div class="row">
+        <div class="col-md-4" *ngFor="let product of products" (click)="viewProductDetails(product)">
+            <div class="product-card">
+                <img [src]="getSafeUrl(product.imageUrl)" alt="{{ product.name }}">
+                <h2>{{ product.name }}</h2>
+                <p>{{ product.description }}</p>
+                <p class="price">₹{{ product.price }}</p>
+                <div class="icon-wrapper">
+                    <i class="fas fa-heart" (click)="addToWishlist(product)"></i>
+                    <i class="fas fa-shopping-cart" (click)="addToCart(product)"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

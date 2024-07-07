@@ -1,0 +1,48 @@
+$primary-color: #55AD9B;
+$success-color: #95D2B3;
+
+// Apply styles
+.container-fluid {
+  margin-top: 2rem;
+
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: $primary-color;
+    i {
+      color: $primary-color;
+    }
+  }
+
+  .card {
+    height: 100%;
+    .card-body {
+      display: flex;
+      align-items: center;
+      color: white;
+
+      .me-3 {
+        margin-right: 1rem;
+      }
+
+      .card-title {
+        font-size: 1.25rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .display-5 {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin: 0;
+      }
+    }
+  }
+
+  .user {
+    background-color: $primary-color;
+  }
+
+  .event {
+    background-color: $success-color;
+  }
+}

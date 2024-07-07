@@ -1,0 +1,54 @@
+.card {
+    margin-top: 20px;
+  
+    .card-header {
+      background-color: #f8f9fa;
+      padding: 10px 20px;
+      border-bottom: 1px solid #dee2e6;
+    }
+    
+    .btn-add-product {
+        background-color: #55AD9B;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    
+        &:hover {
+          background-color: darken(#55AD9B, 10%);
+        }
+      }
+    .card-body {
+      padding: 20px;
+  
+      table {
+        width: 100%;
+        border-collapse: collapse;
+  
+        th, td {
+          padding: 8px;
+          text-align: left;
+          border-bottom: 1px solid #dee2e6;
+        }
+  
+        th {
+          background-color: #f8f9fa;
+          font-weight: bold;
+        }
+  
+        td {
+          button {
+            margin-right: 5px;
+          }
+        }
+  
+        tbody tr:nth-child(even) {
+          background-color: #f2f2f2;
+        }
+      }
+    }
+  }
+  
