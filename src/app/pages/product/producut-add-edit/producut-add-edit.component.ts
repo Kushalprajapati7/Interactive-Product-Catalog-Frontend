@@ -117,7 +117,7 @@ export class ProducutAddEditComponent implements OnInit {
             showConfirmButton: false,
             timer: 1000
           });
-          this.router.navigate(['product/all-products']);
+          this.router.navigate(['product/all-product']);
         },
         error => {
           console.error('Error updating Product:', error);

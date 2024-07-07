@@ -2,8 +2,24 @@ $light-green: #D8EFD3;
 $light-teal: #95D2B3;
 $medium-teal: #55AD9B;
 $dark-teal: #F1F8E8;
+
 .product-catalog {
   padding: 20px;
+
+  .d-flex {
+    .search-bar {
+      input {
+        padding: 5px 10px;
+        border: 1px solid $medium-teal;
+        border-radius: 5px;
+        margin-right: 10px;
+        &:focus {
+          outline: none;
+          border-color: $light-teal;
+        }
+      }
+    }
+  }
 
   .product-card {
     border: 1px solid #eee;
@@ -67,7 +83,7 @@ $dark-teal: #F1F8E8;
   }
 
   .btn-add-product {
-    background-color: #55AD9B;
+    background-color: $medium-teal;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -77,7 +93,7 @@ $dark-teal: #F1F8E8;
     transition: background-color 0.3s;
 
     &:hover {
-      background-color: darken(#55AD9B, 10%);
+      background-color: darken($medium-teal, 10%);
     }
   }
 }

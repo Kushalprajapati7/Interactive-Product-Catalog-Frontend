@@ -1,8 +1,4 @@
 <div class="container product-details mt-5" *ngIf="product">
-    <div class="d-flex justify-content-end align-items-center mb-3">
-        <button class="btn btn-primary me-2" (click)="updateProduct(product)">Update</button>
-        <button class="btn btn-danger" (click)="deleteProduct(product)">Delete</button>
-    </div>
     <div class="row">
         <div class="col-md-6">
             <img [src]="getSafeUrl(product.imageUrl)" alt="{{ product.name }}" class="product-image">
