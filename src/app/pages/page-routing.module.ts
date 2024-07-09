@@ -13,23 +13,23 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
-    // canActivate: [RoleGuard],
-    // data: { role: 'admin' }
+    canActivate: [RoleGuard],
+    data: { role: 'admin' }
   },
   {
     path: 'product',
     loadChildren: () => import('./product/product.module').then(m => m.ProductModule),
-    // canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: 'category',
     loadChildren: () => import('./category/category.module').then(m => m.CategoryModule),
-    // canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: 'users',
     loadChildren: () => import('./user/user.module').then(m => m.UserModule),
-    // canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
 
 

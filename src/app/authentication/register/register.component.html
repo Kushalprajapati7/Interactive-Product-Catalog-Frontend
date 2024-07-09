@@ -34,8 +34,8 @@
             <div class="form-group mt-3">
                 <label for="role" class="me-2">Role:</label>
                 <select id="role" class="form-control" formControlName="role">
-                    <option value="user" selected>User</option>
-                    <option value="editor" selected>Editor</option>
+                    <option value="customer" selected>Customer</option>
+
                 </select>
                 <div *ngIf="hasError('role', 'required')" class="text-danger">
                     *Role is required

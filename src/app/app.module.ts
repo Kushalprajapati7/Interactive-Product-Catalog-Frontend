@@ -18,7 +18,7 @@ import { ErrorInterceptor } from './core/interceptors/error.interceptor';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    CommonModule 
+    CommonModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from 'src/app/core/services/product.service';
-import { CategoryService } from 'src/app/core/services/category.service'; 
+import { CategoryService } from 'src/app/core/services/category.service';
 import { IProduct } from 'src/app/core/interfaces/productInterface';
-import { ICategory } from 'src/app/core/interfaces/categoryInterface'; 
+import { ICategory } from 'src/app/core/interfaces/categoryInterface';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -17,7 +17,7 @@ export class ProducutAddEditComponent implements OnInit {
   selectedFile: File | null = null;
   productId: string | null = null;
   isEditing: boolean = false;
-  categories: ICategory[] = []; 
+  categories: ICategory[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -29,7 +29,7 @@ export class ProducutAddEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.initializeForm();
-    this.loadCategories(); 
+    this.loadCategories();
 
     this.route.paramMap.subscribe(params => {
       this.productId = params.get('id');
@@ -46,7 +46,7 @@ export class ProducutAddEditComponent implements OnInit {
       description: ['', Validators.required],
       image: [null, Validators.required],
       price: ['', [Validators.required, Validators.min(0)]],
-      category: ['', Validators.required] 
+      category: ['', Validators.required]
     });
   }
 
@@ -133,7 +133,7 @@ export class ProducutAddEditComponent implements OnInit {
           name: product.name,
           description: product.description,
           price: product.price,
-          category: product.category 
+          category: product.category
         });
         this.selectedFile = null;
       },
@@ -146,7 +146,7 @@ export class ProducutAddEditComponent implements OnInit {
   loadCategories(): void {
     this.categoryService.getAllCategories().subscribe(
       (categories: ICategory[]) => {
-        this.categories = categories;        
+        this.categories = categories;
       },
       (error) => {
         console.error('Error loading categories:', error);

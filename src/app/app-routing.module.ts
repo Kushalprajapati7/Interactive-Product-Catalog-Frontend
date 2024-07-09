@@ -10,9 +10,7 @@ const routes: Routes = [
   },
   {
     path:'auth',
-    // component:LoginComponent,
     loadChildren:()=>import('./authentication/authentication.module').then(m=>m.AuthenticationModule),
-    // canActivate: []
   },
 ];
 
