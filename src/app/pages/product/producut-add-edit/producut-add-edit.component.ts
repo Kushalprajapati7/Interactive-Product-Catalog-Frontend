@@ -146,9 +146,7 @@ export class ProducutAddEditComponent implements OnInit {
   loadCategories(): void {
     this.categoryService.getAllCategories().subscribe(
       (categories: ICategory[]) => {
-        this.categories = categories;
-        console.log(this.categories);
-        
+        this.categories = categories;        
       },
       (error) => {
         console.error('Error loading categories:', error);

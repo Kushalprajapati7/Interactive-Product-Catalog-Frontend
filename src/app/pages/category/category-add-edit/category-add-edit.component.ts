@@ -57,7 +57,6 @@ export class CategoryAddEditComponent {
     }
     this.categoryService.addCategory(category).subscribe(
       response => {
-        console.log(response,"event");
         Swal.fire({
           position: "center",
           icon: "success",

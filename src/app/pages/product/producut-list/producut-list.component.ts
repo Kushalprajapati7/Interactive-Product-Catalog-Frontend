@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import { IProduct } from 'src/app/core/interfaces/productInterface';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ProductService } from 'src/app/core/services/product.service';
+import { CategoryService } from 'src/app/core/services/category.service';
 import Swal from 'sweetalert2';
-
 @Component({
   selector: 'app-producut-list',
   templateUrl: './producut-list.component.html',
@@ -14,12 +14,15 @@ import Swal from 'sweetalert2';
 export class ProducutListComponent implements OnInit {
   products: IProduct[] = [];
   filteredProducts: IProduct[] = [];
+  categories: any[] = [];
+  selectedCategory: string = '';
   productImageLink: string = 'http://localhost:3000';
   searchQuery: string = '';
   canAdmin: boolean = false;
 
   constructor(
     private productService: ProductService,
+    private categoryService: CategoryService,
     private sanitizer: DomSanitizer,
     private router: Router,
     private authService: AuthService
@@ -27,9 +30,12 @@ export class ProducutListComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadProductDetails();
+    this.loadCategories();
     const role = this.authService.getRole();
     this.canAdmin = role === 'admin';
   }
+
+  
 
   getSafeUrl(path: string): SafeUrl {
     return this.sanitizer.bypassSecurityTrustUrl(`http://localhost:3000/${path}`);
@@ -39,8 +45,6 @@ export class ProducutListComponent implements OnInit {
     this.productService.getAllProducts().subscribe(
       (data: IProduct[]) => {
         this.products = data;
-        console.log(data);
-        
         this.filteredProducts = data;
       },
       (error) => {
@@ -49,16 +53,56 @@ export class ProducutListComponent implements OnInit {
     );
   }
 
-  searchProducts(): void {
-    if (this.searchQuery.trim() === '') {
-      this.filteredProducts = this.products;
-    } else {
-      this.filteredProducts = this.products.filter(product =>
-        product.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-        product.description.toLowerCase().includes(this.searchQuery.toLowerCase())
-      );
-    }
+  loadCategories(): void {
+    this.categoryService.getAllCategories().subscribe(
+      (data: any[]) => {
+        this.categories = data;
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
   }
+
+  searchProducts(): void {
+    this.filterProducts();
+  }
+
+  filterByCategory(): void {
+    this.filterProducts();
+  }
+
+  filterProducts(): void {
+    this.filteredProducts = this.products.filter(product => {
+      const matchesCategory = this.selectedCategory === '' || product.category._id === this.selectedCategory;
+      const matchesSearch = product.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+        product.description.toLowerCase().includes(this.searchQuery.toLowerCase());
+      return matchesCategory && matchesSearch;
+    });
+  }
+
+  deleteProduct(product: IProduct): void {
+    const prodId = product._id;
+    if (!prodId) {
+      throw new Error('Product not found');
+    }
+    this.productService.deleteProduct(prodId).subscribe(
+      (response) => {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Product Deleted Successfully",
+          showConfirmButton: false,
+          timer: 1000
+        });
+        this.loadProductDetails();
+      },
+      (error) => {
+        console.error(error);
+      });
+  }
+
+  
 
   addToWishlist(product: IProduct): void {
     console.log(`${product.name} added to wishlist`);
@@ -78,29 +122,6 @@ export class ProducutListComponent implements OnInit {
 
   editProduct(product: IProduct): void {
     console.log(`Updating ${product.name}`);
-    this.router.navigate(['product/edit-product', product._id])
-  }
-
-  deleteProduct(product: IProduct): void {
-    console.log(`Deleting ${product.name}`);
-    if (!product._id) {
-      throw new Error('Product not found')
-
-    }
-    this.productService.deleteProduct(product._id).subscribe(
-      (response) => {
-        this.products = this.products.filter((u) => u._id !== product._id);
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Product Deleted Successfully",
-          showConfirmButton: false,
-          timer: 1000
-        });
-        this.router.navigate(['product/all-product']);
-      },
-      (error) => {
-        console.error(error);
-      })
+    this.router.navigate(['product/edit-product', product._id]);
   }
 }

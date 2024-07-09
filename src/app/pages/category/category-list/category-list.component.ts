@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ICategory } from 'src/app/core/interfaces/categoryInterface';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { CategoryService } from 'src/app/core/services/category.service';
 import Swal from 'sweetalert2';
 
@@ -11,20 +12,23 @@ import Swal from 'sweetalert2';
 })
 export class CategoryListComponent implements OnInit {
   categories: ICategory[] = []; 
+  isAdmin:boolean=false;
   constructor(
     private router: Router,
     private categoryService: CategoryService,
+    private authService:AuthService
   ){}
 
   ngOnInit(): void {
     this.loadCategoryDetails();
+    const role = this.authService.getRole();
+    this.isAdmin = role === 'admin';
   }
 
   loadCategoryDetails(){
     this.categoryService.getAllCategories().subscribe(
       (categories: ICategory[]) => {
         this.categories = categories;
-        console.log(this.categories);
       },
       (error) => {
         console.error('Error loading categories:', error);

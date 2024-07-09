@@ -7,7 +7,7 @@
             <div class="product-info">
                 <h1>{{ product.name }}</h1>
                 <p>{{ product.description }}</p>
-                <p class="price">₹{{ product.price }}</p>
+                <p class="price">{{ product.price | currency:'INR' }}</p>
                 <div class="action-buttons">
                     <button (click)="addToCart(product)">Add to Cart</button>
                     <button (click)="buyNow(product)">Buy Now</button>

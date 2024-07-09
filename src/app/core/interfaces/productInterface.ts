@@ -5,5 +5,7 @@ export interface IProduct  {
     imageUrl: any;
     price: number;
     category: any;
+    createdAt:Date;
+    updatedAt:Date;
   }
   

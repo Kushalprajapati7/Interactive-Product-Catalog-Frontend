@@ -13,7 +13,6 @@ export class UserListComponent implements OnInit {
   users: IUser[] = [];
   constructor(
     private userService: UserService,
-    // private sanitizer: DomSanitizer
     private router: Router
   ) { }
 
@@ -36,23 +35,44 @@ export class UserListComponent implements OnInit {
   deleteUser(user: IUser) {
     const userId = user._id;
     if (!userId) {
-      throw new Error('user not found')
+      throw new Error('User not found');
     }
-    this.userService.deleteUser(userId).subscribe(
-      (response) => {
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "User Deleted Successfully",
-          showConfirmButton: false,
-          timer: 1000
-        });
-        this.users = this.users.filter((u) => u._id !== user._id);
-      },
-      (error) => {
-        console.error(error);
+  
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.userService.deleteUser(userId).subscribe(
+          (response) => {
+            this.users = this.users.filter((u) => u._id !== user._id);
+            Swal.fire({
+              title: "Deleted!",
+              text: "User has been deleted.",
+              icon: "success"
+            });
+          },
+          (error) => {
+            console.error(error);
+            Swal.fire({
+              title: "Error!",
+              text: "An error occurred while deleting the user.",
+              icon: "error"
+            });
+          }
+        );
       }
-    )
+    });
+  }
+  
+
+  navigateToEditUserPage(user:IUser){
+    this.router.navigate(['users/edit-user',user._id])
   }
 
 }

@@ -1,41 +1,56 @@
-.container {
-    padding: 20px;
-  
-    .table-responsive {
-      overflow-x: auto; 
+.card {
+  margin-top: 20px;
+
+  .card-header {
+    background-color: #55ad9b;
+    color: white;
+    padding: 10px 20px;
+    border-bottom: 1px solid #dee2e6;
+  }
+
+  .btn-add-product {
+    background-color: #55ad9b;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: darken(#55ad9b, 10%);
     }
-  
+  }
+  .card-body {
+    padding: 20px;
+
     table {
       width: 100%;
       border-collapse: collapse;
-  
+      background-color: #95d2b3;
+
       th,
       td {
+        padding: 8px;
         text-align: left;
-        vertical-align: middle;
+        border-bottom: 1px solid #dee2e6;
       }
-  
+
       th {
-        background-color: #06D001; 
-        color: #fff;
+        background-color: #f8f9fa;
         font-weight: bold;
       }
-  
-      tbody tr:nth-child(even) {
-        background-color: #f2f2f2; 
-      }
-  
-      tbody tr:hover {
-        background-color: #e9ecef; 
-      }
-  
+
       td {
-        border: 1px solid #dee2e6; 
+        button {
+          margin-right: 5px;
+        }
       }
-  
-      .btn {
-        padding: 6px 12px;
+
+      tbody tr:nth-child(even) {
+        background-color: #f2f2f2;
       }
     }
   }
-  
+}

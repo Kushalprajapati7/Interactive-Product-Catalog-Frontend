@@ -17,6 +17,10 @@ const routes: Routes = [
     path: 'add-user',
     component: UserAddEditComponent
   },
+  {
+    path: 'edit-user/:id',
+    component: UserAddEditComponent
+  },
 ];
 
 @NgModule({

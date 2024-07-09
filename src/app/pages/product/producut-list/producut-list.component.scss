@@ -2,17 +2,42 @@ $light-green: #D8EFD3;
 $light-teal: #95D2B3;
 $medium-teal: #55AD9B;
 $dark-teal: #F1F8E8;
+.category-filter {
+  margin-left: 10px;
+
+  select {
+    padding: 5px 10px;
+    border: 1px solid $medium-teal;
+    border-radius: 5px;
+    &:focus {
+      outline: none;
+      border-color: $light-teal;
+    }
+  }
+}
 
 .product-catalog {
   padding: 20px;
 
   .d-flex {
     .search-bar {
+      position: relative;
+      display: flex;
+      align-items: center;
+
+      .search-icon {
+        position: absolute;
+        left: 10px;
+        font-size: 1rem;
+        color: $medium-teal;
+      }
+
       input {
-        padding: 5px 10px;
+        padding: 5px 10px 5px 30px; 
         border: 1px solid $medium-teal;
         border-radius: 5px;
         margin-right: 10px;
+
         &:focus {
           outline: none;
           border-color: $light-teal;
